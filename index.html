@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gesture Pong | Hand Tracking</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="app">
+
+    <!-- HEADER -->
+    <header>
+      <div>
+        <p class="eyebrow">CAMERA-POWERED ARCADE</p>
+        <h1>GESTURE <span>PONG</span></h1>
+      </div>
+
+      <p id="status">● Ready — camera not started</p>
+    </header>
+
+    <!-- SCORE -->
+    <section class="scores">
+      <div class="score cyan">
+        <small>PLAYER 01</small>
+        <b id="s1">0</b>
+        <em>CYAN</em>
+      </div>
+
+      <div class="vs">
+        <span id="targetLabel">FIRST TO 11</span>
+        <br>
+        <strong id="state">READY</strong>
+      </div>
+
+      <div class="score purple">
+        <small>PLAYER 02</small>
+        <b id="s2">0</b>
+        <em>PURPLE</em>
+      </div>
+    </section>
+
+    <!-- ARENA GAME -->
+    <section class="court">
+      <canvas id="game" width="1100" height="620"></canvas>
+
+      <div id="overlay">
+        <div>
+          <p class="eyebrow">ARCADE · HAND TRACKING</p>
+
+          <h2 id="otitle">READY TO PLAY?</h2>
+
+          <p id="odesc">
+            Izinkan akses kamera, posisikan tangan di depan webcam,
+            lalu tekan tombol Start Game.
+          </p>
+
+          <button id="start" type="button">
+            START GAME →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME SETTINGS -->
+    <section class="settings panel">
+      <div class="settings-heading">
+        <div>
+          <p class="eyebrow">CUSTOMIZE YOUR MATCH</p>
+          <h2>GAME SETTINGS</h2>
+        </div>
+
+        <button id="applySettings" type="button">
+          APPLY SETTINGS
+        </button>
+      </div>
+
+      <div class="settings-grid">
+
+        <label for="speedSetting">
+          Kecepatan bola
+
+          <select id="speedSetting">
+            <option value="slow">Lambat</option>
+            <option value="normal" selected>Normal</option>
+            <option value="fast">Cepat</option>
+            <option value="insane">Insane</option>
+          </select>
+        </label>
+
+        <label for="themeSetting">
+          Tema board
+
+          <select id="themeSetting">
+            <option value="purple" selected>Neon Purple</option>
+            <option value="cyan">Neon Cyan</option>
+            <option value="classic">Classic</option>
+          </select>
+        </label>
+
+        <label for="ballSizeSetting">
+          Ukuran bola
+          <span id="ballSizeValue">10 px</span>
+
+          <input
+            id="ballSizeSetting"
+            type="range"
+            min="6"
+            max="18"
+            value="10"
+            step="1"
+          >
+        </label>
+
+        <label for="targetSetting">
+          Target skor
+
+          <select id="targetSetting">
+            <option value="5">5 poin</option>
+            <option value="7">7 poin</option>
+            <option value="11" selected>11 poin</option>
+            <option value="15">15 poin</option>
+          </select>
+        </label>
+
+      </div>
+
+      <p class="settings-note">
+        Pilih pengaturan yang kamu inginkan, lalu tekan Apply Settings.
+        Skor akan direset saat pengaturan diterapkan.
+      </p>
+    </section>
+
+    <!-- SATU KAMERA -->
+    <section class="lower">
+      <div class="panel camera-panel">
+
+        <h3>
+          CAMERA / HAND TRACKING
+          <small id="camstate">WAITING</small>
+        </h3>
+
+        <div class="videobox">
+          <video
+            id="video"
+            autoplay
+            playsinline
+            muted
+          ></video>
+
+          <span id="placeholder">
+            Menunggu kamera...
+          </span>
+        </div>
+
+        <p>
+          Player 1 · Kontrol tangan atau tombol W / S
+        </p>
+
+        <p>
+          Player 2 · Tombol panah ↑ / ↓
+        </p>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>GESTURE PONG</span>
+      <span>BUILT FOR FUN · PLAY FAIR</span>
+    </footer>
+
+  </main>
+
+  <!-- MEDIAPIPE: MUAT SEBELUM GAME.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+  <!-- GAME SCRIPT -->
+  <script src="game.js"></script>
+
+</body>
+</html>
